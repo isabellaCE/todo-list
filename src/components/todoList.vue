@@ -30,21 +30,8 @@
   </section>
 </template>
 <script setup></script>
-<style scoped>
-body {
-  margin: 0;
-  font-family: "Open Sans", sans-serif;
-}
-
-main {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  padding-top: 60px;
-}
-
-main .todo-list input {
+<style>
+.todo-list input {
   box-sizing: border-box;
   height: 28px;
   border-radius: 0.25rem;
@@ -53,7 +40,7 @@ main .todo-list input {
   margin-top: 32px;
 }
 
-main button {
+button {
   background-color: transparent;
   cursor: pointer;
   box-sizing: border-box;
@@ -62,34 +49,34 @@ main button {
   color: #fff;
 }
 
-main button:hover {
+button:hover {
   opacity: 0.8;
 }
 
-main button.add {
+button.add {
   background-color: #007bff;
   border: 1px solid #007bff;
   margin-left: 2px;
 }
 
-main button.clear {
+button.clear {
   background-color: #dc3545;
   border: 1px solid #dc3545;
   display: block;
   margin: auto;
 }
 
-main button:focus {
+button:focus {
   outline: 0;
 }
 
-main > section.todo-list h3 {
+section.todo-list h3 {
   text-align: center;
   margin-top: 24px;
   width: 100%;
 }
 
-main > section.todo-list {
+section.todo-list {
   flex-wrap: wrap;
   border: 1px solid lightgrey;
   background-color: rgb(248, 248, 248);
@@ -100,22 +87,22 @@ main > section.todo-list {
   border-radius: 0.25rem;
 }
 
-main .all-todos .single-todo {
+.all-todos .single-todo {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-main .all-todos .single-todo p {
+.all-todos .single-todo p {
   margin: 12px 0;
   cursor: pointer;
 }
 
-main .all-todos .single-todo.done p {
+.all-todos .single-todo.done p {
   text-decoration: line-through;
 }
 
-main .all-todos .single-todo button.remove {
+.all-todos .single-todo button.remove {
   width: 12px;
   height: 12px;
   border: none;
@@ -125,7 +112,7 @@ main .all-todos .single-todo button.remove {
   margin-left: 8px;
 }
 
-main > section.todo-list button.clear {
+section.todo-list button.clear {
   margin-top: 24px;
 }
 
