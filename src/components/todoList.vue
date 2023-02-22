@@ -3,21 +3,25 @@
     <h3>Lista de Tarefas</h3>
 
     <div class="all-todos">
-      <div class="single-todo done">
-        <p>Aprender HTML, CSS e Javascript</p>
-      </div>
-      <div class="single-todo done">
-        <p>Aprender o básico de Vue JS</p>
-      </div>
-      <div class="single-todo">
-        <p>Completar o desafio de Vue JS com excelência</p>
+      <div
+        v-for="todo in todos"
+        :key="todo"
+        class="single-todo"
+        :class="{ done: todo.done }"
+      >
+        <p>{{ todo.text }}</p>
       </div>
     </div>
 
     <button class="clear">Limpar tudo</button>
 
-    <input type="text" placeholder="Escreva uma nova tarefa..." />
-    <button class="add">Adicionar</button>
+    <input
+      type="text"
+      placeholder="Escreva uma nova tarefa..."
+      v-model="newTodo.text"
+    />
+    <button class="add" @click="addTodo()">Adicionar</button>
+    <p class="error" :class="{ errorDisplay: error }">Por favor, digite algo</p>
 
     <div class="instructions">
       Instruções:
@@ -29,7 +33,34 @@
     </div>
   </section>
 </template>
-<script setup></script>
+<script>
+export default {
+  data() {
+    return {
+      todos: [],
+      newTodo: {
+        text: "",
+        done: false,
+      },
+      error: false,
+    };
+  },
+  methods: {
+    addTodo() {
+      if (this.newTodo.text) {
+        this.todos.push(this.newTodo);
+        this.newTodo = {
+          text: "",
+          done: false,
+        };
+        this.error = false;
+      } else {
+        this.error = true;
+      }
+    },
+  },
+};
+</script>
 <style>
 .todo-list input {
   box-sizing: border-box;
@@ -114,6 +145,17 @@ section.todo-list {
 
 section.todo-list button.clear {
   margin-top: 24px;
+}
+
+.error {
+  font-size: 12px;
+  margin-top: 10px;
+  color: #dc3545;
+  display: none;
+}
+
+.errorDisplay {
+  display: block;
 }
 
 div.instructions {
