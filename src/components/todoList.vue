@@ -4,16 +4,19 @@
 
     <div class="all-todos">
       <div
-        v-for="todo in todos"
-        :key="todo"
+        v-for="(todo, index) in todos"
+        :key="index"
         class="single-todo"
         :class="{ done: todo.done }"
+        @click="isDone(todo, index)"
       >
         <p>{{ todo.text }}</p>
       </div>
     </div>
 
-    <button class="clear">Limpar tudo</button>
+    <button v-if="todos.length" class="clear" @click="clearList">
+      Limpar tudo
+    </button>
 
     <input
       type="text"
@@ -49,6 +52,7 @@ export default {
     addTodo() {
       if (this.newTodo.text) {
         this.todos.push(this.newTodo);
+        localStorage.setItem("todos", JSON.stringify(this.todos));
         this.newTodo = {
           text: "",
           done: false,
@@ -58,6 +62,20 @@ export default {
         this.error = true;
       }
     },
+    isDone(todo, index) {
+      todo.done = !todo.done;
+      this.todos[index].done = todo.done;
+      localStorage.setItem("todos", JSON.stringify(this.todos));
+    },
+    clearList() {
+      this.todos = [];
+      localStorage.clear();
+    },
+  },
+  mounted() {
+    if (localStorage.length) {
+      this.todos = JSON.parse(localStorage.getItem("todos"));
+    }
   },
 };
 </script>
